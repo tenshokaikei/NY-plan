@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【完全図解】あなたに最適なアメリカ東海岸の旅</title>
+    <style>
+        /* =========================================
+           基本設定・リセット
+           ========================================= */
+        :root {
+            --bg-color: #f4f5f7;
+            --text-main: #2c3e50;
+            --text-muted: #596a7a;
+            --accent-gold: #b8975a;
+            --accent-blue: #34495e;
+            --card-bg: #ffffff;
+            --border-color: #e1e4e8;
+            --ny-color: #2980b9;
+            --dc-color: #c0392b;
+            --bos-color: #27ae60;
+            --font-base: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            --font-serif: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-base);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            font-size: 16px; /* ベースフォントサイズ */
+            -webkit-font-smoothing: antialiased;
+            padding: 2rem 1rem;
+        }
+
+        /* 最小フォントサイズ制限 (0.95rem = 15.2px) */
+        .min-text, .badge, .tag, .note {
+            font-size: 0.95rem !important;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--bg-color);
+        }
+
+        /* =========================================
+           レイアウト・共通コンポーネント
+           ========================================= */
+        .top-banner {
+            background-color: var(--accent-blue);
+            color: #ffffff;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .top-banner h1 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .top-banner .date {
+            color: #bdc3c7;
+            margin-bottom: 2rem;
+        }
+
+        .conclusion-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .conclusion-box h2 {
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-gold);
+            display: inline-block;
+            padding-bottom: 0.3rem;
+        }
+
+        .flex-lists {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .flex-lists > div {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .flex-lists ul {
+            list-style-type: none;
+        }
+
+        .flex-lists li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .flex-lists li::before {
+            content: "✓";
+            color: var(--accent-gold);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            margin: 4rem 0 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* ランキング */
+        .ranking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .ranking-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent-gold);
+            transition: transform 0.2s;
+        }
+
+        .ranking-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .rank-num {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .rank-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* 都市別セクション */
+        .city-wrapper {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+        }
+
+        .city-wrapper.ny { border-top: 8px solid var(--ny-color); }
+        .city-wrapper.dc { border-top: 8px solid var(--dc-color); }
+        .city-wrapper.bos { border-top: 8px solid var(--bos-color); }
+
+        .category-title {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin: 2.5rem 0 1.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-color);
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .spot-card {
+            background: #fdfdfd;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .spot-card.detailed {
+            grid-column: 1 / -1; /* 詳細カードは全幅を使用 */
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            background: #fffbfa;
+            border-color: #f0e6d2;
+        }
+
+        @media (max-width: 768px) {
+            .spot-card.detailed {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .spot-header {
+            margin-bottom: 1rem;
+        }
+
+        .spot-id {
+            color: var(--text-muted);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .spot-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--text-main);
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .spot-name ruby {
+            ruby-align: center;
+        }
+
+        .spot-name rt {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: normal;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            background: #eef2f5;
+            color: #455a64;
+            font-weight: bold;
+        }
+
+        .badge.super { background: #ffeaa7; color: #d35400; }
+        .badge.match { background: #dff9fb; color: #22a6b3; }
+        .badge.category { background: #34495e; color: #ffffff; }
+
+        .spot-body p {
+            margin-bottom: 0.8rem;
+        }
+
+        .detail-points {
+            background: rgba(255,255,255,0.8);
+            border: 1px dashed #dcdde1;
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .detail-points h4 {
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .detail-points ul {
+            padding-left: 1.2rem;
+        }
+
+        .detail-points li {
+            margin-bottom: 0.4rem;
+        }
+
+        .highlight-box {
+            background: var(--bg-color);
+            padding: 1rem;
+            border-left: 4px solid var(--accent-blue);
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* 刺さる場所リスト */
+        .special-picks {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem;
+            border-radius: 12px;
+        }
+
+        .special-picks h2 {
+            text-align: center;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .picks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .pick-col h3 {
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .pick-col ul {
+            list-style: none;
+        }
+
+        .pick-col li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 1.1rem;
+        }
+
+        .pick-col li::before {
+            content: "★";
+            color: var(--accent-gold);
+            margin-right: 0.5rem;
+        }
+
+        /* ユーティリティ */
+        .text-bold { font-weight: bold; }
+        .text-gold { color: var(--accent-gold); }
+        .mt-2 { margin-top: 2rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ==========================================
+         TOPバナー & 結論
+         ========================================== -->
+    <div class="top-banner">
+        <h1>あなたに最適なアメリカ東海岸の旅</h1>
+        <div class="date min-text">最終分析日: 2026年5月11日現在</div>
+        
+        <div class="conclusion-box">
+            <h2>旅行満足度を最大化する「体験の軸」</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 1rem;">
+                あなたの場合、「有名だから行く」「観光地の数」よりも、<strong>“その場所でどんな体験になるか”</strong>が満足度を大きく左右します。単なる観光地一覧ではなく、「実際に行く価値が高い場所」を相性を意識して厳選・整理しました。
+            </p>
+            
+            <div class="flex-lists">
+                <div>
+                    <h3 style="color:#bdc3c7; margin-bottom:0.5rem;">特に強い相性・志向性</h3>
+                    <ul>
+                        <li>“空間体験”と“都市文化”</li>
+                        <li>“歩いて感じる場所”</li>
+                        <li>“静かな知的体験”</li>
+                        <li>“夜の空気”</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color:#bdc3c7; margin-bottom:0.5rem;">選定・評価の重視ポイント</h3>
+                    <ul>
+                        <li>美術館を“空間”として味わう</li>
+                        <li>一人旅適性・安全性・一人で歩く時間を楽しむ</li>
+                        <li>街歩き価値・歴史・建築・文化背景</li>
+                        <li>“余韻”が残る場所</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         相性TOP10ランキング
+         ========================================== -->
+    <h2 class="section-title">🏆 あなたとの相性が特に強い場所 TOP10</h2>
+    <div class="ranking-grid">
+        <div class="ranking-card">
+            <div class="rank-num">1</div>
+            <div class="rank-name">フリック・コレクション<br><span class="min-text" style="color:var(--text-muted)">NY / 美術館</span></div>
+        </div>
+        <div class="ranking-card">
+            <div class="rank-num">2</div>
+            <div class="rank-name">イザベラ・スチュワート・ガードナー美術館<br><span class="min-text" style="color:var(--text-muted)">Boston / 美術館</span></div>
+        </div>
+        <div class="ranking-card">
+            <div class="rank-num">3</div>
+            <div class="rank-name">ナショナル・ギャラリー<br><span class="min-text" style="color:var(--text-muted)">DC / 美術館</span></div>
+        </div>
+        <div class="ranking-card">
+            <div class="rank-num">4</div>
+            <div class="rank-name">ウェスト・ヴィレッジ<br><span class="min-text" style="color:var(--text-muted)">NY / 街歩き</span></div>
+        </div>
+        <div class="ranking-card">
+            <div class="rank-num">5</div>
+            <div class="rank-name">メトロポリタン美術館<br><span class="min-text" style="color:var(--text-muted)">NY / 美術館</span></div>
+        </div>
+        <div class="ranking-card">
+            <div class="rank-num">6</div>
+            <div class="rank-name">ブルックリン・ハイツ<br><span class="min-text" style="color:var(--text-muted)">NY / 街歩き・夜景</span></div>
+        </div>
+        <div class="ranking-card">
+            <div class="rank-num">7</div>
+            <div class="rank-name">ジョージタウン<br><span class="min-text" style="color:var(--text-muted)">DC / 街歩き</span></div>
+        </div>
+        <div class="ranking-card">
+            <div class="rank-num">8</div>
+            <div class="rank-name">Village Vanguard<br><span class="min-text" style="color:var(--text-muted)">NY / 文化・音楽</span></div>
+        </div>
+        <div class="ranking-card">
+            <div class="rank-num">9</div>
+            <div class="rank-name">ビーコンヒル<br><span class="min-text" style="color:var(--text-muted)">Boston / 街歩き</span></div>
+        </div>
+        <div class="ranking-card">
+            <div class="rank-num">10</div>
+            <div class="rank-name">ハーバード大学<br><span class="min-text" style="color:var(--text-muted)">Boston / 大学・知性</span></div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================
+         都市別：ニューヨーク
+         ========================================== -->
+    <div class="city-wrapper ny">
+        <h2 class="section-title" style="margin-top:0; border-color:var(--ny-color);">🗽 ニューヨーク編</h2>
+        
+        <div class="category-title">【最優先・超優先】美術館・建築</div>
+        <div class="grid-cards">
+            <!-- 1. MET -->
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">1.</span>メトロポリタン美術館</div>
+                    <div class="badges">
+                        <span class="badge super min-text">超優先</span>
+                        <span class="badge match min-text">全部強い</span>
+                    </div>
+                    <p class="text-bold text-gold">世界最高峰総合美術館。</p>
+                    <p>単なる絵画館ではない。「世界の文明」が1つに入っており、「人類史を歩く感覚」になる。</p>
+                    <p>ルーヴルのような圧迫感より、「巨大だが落ち着いている」静かな圧倒感が魅力。</p>
+                </div>
+                <div class="detail-points">
+                    <h4>あなた向きの理由</h4>
+                    <p>印象派、フェルメール、ゴッホ、セザンヌ等が好きなら、「西洋美術の流れ」を理解しやすい。</p>
+                    <div class="highlight-box">
+                        <strong>実務ポイント:</strong> 「全部見る」は無理。テーマ絞り推奨。<br>
+                        <strong>特におすすめエリア:</strong> ヨーロッパ絵画、印象派、武器甲冑、エジプト館
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. MoMA -->
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">2.</span>ニューヨーク近代美術館 (MoMA)</div>
+                    <div class="badges">
+                        <span class="badge super min-text">超優先</span>
+                        <span class="badge match min-text">一人旅向き</span>
+                    </div>
+                    <p class="text-bold text-gold">近代〜現代美術の聖地。</p>
+                    <p>単なる美術館ではなく、「20世紀以降の都市文化」「現代都市NY」そのものを体験する場所。</p>
+                </div>
+                <div class="detail-points">
+                    <h4>見どころ・ポイント</h4>
+                    <ul>
+                        <li><strong>世界トップクラスの名画密度:</strong> 短時間で星月夜、ゴッホ、モネ、ピカソ、ダリ、Rothko、Warholが見られる。</li>
+                        <li><strong>空間の質:</strong> 館内が洗練・静か・都市的で、「1人でいること」が自然に馴染む。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3. フリック -->
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">3.</span>フリック・コレクション</div>
+                    <div class="badges">
+                        <span class="badge match min-text">相性トップ級</span>
+                        <span class="badge min-text">パリ好き向け</span>
+                    </div>
+                    <p class="text-bold text-gold">“金持ちの私邸”感を味わう空間。</p>
+                    <p>「超富裕層が本気で集めた芸術」を邸宅空間ごと味わう。かなりヨーロッパ的。</p>
+                </div>
+                <div class="detail-points">
+                    <h4>あなた向きの理由</h4>
+                    <ul>
+                        <li>静かで上品な邸宅空間。</li>
+                        <li>METより静かで、小さく、密度が高い。空気が美しい。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 4, 5 -->
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">4.</span>ホイットニー美術館</div>
+                <p>アメリカ現代美術。High Lineと相性が良い。</p>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">5.</span>グッゲンハイム美術館</div>
+                <div class="badges"><span class="badge min-text">建築好き・空間体験重視</span></div>
+                <p>建築そのものが芸術。</p>
+            </div>
+        </div>
+
+        <div class="category-title">【街歩き】</div>
+        <div class="grid-cards">
+            <!-- 6. ウェスト・ヴィレッジ -->
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">6.</span>ウェスト・ヴィレッジ</div>
+                    <div class="badges">
+                        <span class="badge super min-text">超おすすめ</span>
+                        <span class="badge match min-text">相性かなり高い</span>
+                    </div>
+                    <p class="text-bold text-gold">「住みたいNY」の日常美を感じる場所。</p>
+                </div>
+                <div class="detail-points">
+                    <h4>特徴・ポイント</h4>
+                    <ul>
+                        <li><strong>構成要素:</strong> 小道、レンガ、カフェ、書店、夜の空気。</li>
+                        <li><strong>夜散歩が最高:</strong> カフェの灯りなどが素晴らしい。</li>
+                        <li><strong>一人旅向き:</strong> タイムズスクエアより疲れない、落ち着く、歩きやすい。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 10. ブルックリン・ハイツ -->
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">10.</span>ブルックリン・ハイツ</div>
+                    <div class="badges">
+                        <span class="badge super min-text">超おすすめ</span>
+                    </div>
+                    <p class="text-bold text-gold">静かな高級住宅街。</p>
+                    <p>マンハッタンを“景色として見る”（外から眺める感覚）場所。</p>
+                </div>
+                <div class="detail-points">
+                    <h4>特徴・ポイント</h4>
+                    <ul>
+                        <li><strong>ベスト時間:</strong> 夕方〜夜。</li>
+                        <li><strong>夜景:</strong> 派手ではなく“余韻型”の美しさ。</li>
+                        <li><strong>静けさ:</strong> 観光地疲れをリセットできる。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- その他街歩き -->
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">7.</span>グリニッジ・ヴィレッジ</div>
+                <div class="badges"><span class="badge min-text">音楽・ジャズ好き</span></div>
+                <p>文化人エリア。</p>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">8.</span>ソーホー</div>
+                <p>石畳＋ギャラリー＋ブランド。昼の街歩き向き。</p>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">9.</span>チェルシー</div>
+                <p>ギャラリー街。High Lineとセットが最強。</p>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><ruby><span class="spot-id">11.</span>DUMBO<rt>ダンボ</rt></ruby></div>
+                <p>ブルックリン橋の写真スポット。朝散歩が良い。</p>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">12.</span>セントラル・パーク</div>
+                <div class="badges"><span class="badge min-text">おすすめ: 朝7〜9時</span></div>
+                <p>NYとは思えない静けさ。</p>
+            </div>
+        </div>
+
+        <div class="category-title">【夜景・展望】</div>
+        <div class="grid-cards">
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">13.</span>トップ・オブ・ザ・ロック</div>
+                    <div class="badges"><span class="badge super min-text">最推奨展望台</span></div>
+                    <p class="text-bold text-gold">バランス最強展望台。</p>
+                </div>
+                <div class="detail-points">
+                    <ul>
+                        <li>Empire State Buildingも見える。</li>
+                        <li>昼〜夕方のセントラルパークが特に美しい。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">14.</span>エンパイア・ステート・ビル</div>
+                <p>クラシックNY。</p>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">15.</span>サミット・ワン・ヴァンダービルト</div>
+                <div class="badges"><span class="badge min-text">注意: 映え寄り</span></div>
+                <p>最新系展望台。</p>
+            </div>
+        </div>
+
+        <div class="category-title">【文化・音楽】</div>
+        <div class="grid-cards">
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">16.</span>Village Vanguard</div>
+                    <div class="badges"><span class="badge super min-text">ジャズ最重要</span></div>
+                    <p class="text-bold text-gold">“観光”ではなく“文化”。</p>
+                    <p>「本物のNYジャズ空間」。</p>
+                </div>
+                <div class="detail-points">
+                    <ul>
+                        <li><strong>空間:</strong> 小さい空間が良い。演奏者との距離が近い。</li>
+                        <li><strong>一人旅:</strong> 一人で行きやすい。むしろ一人の方が馴染む。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">特別.</span>Wicked <span class="min-text" style="font-weight:normal">(Broadway)</span></div>
+                    <div class="badges"><span class="badge min-text">初Broadwayに最適</span></div>
+                    <p class="text-bold text-gold">“NY都市文化そのもの”</p>
+                </div>
+                <div class="detail-points">
+                    <ul>
+                        <li>分かりやすい、音楽が強い、世界観の完成度が高い。</li>
+                        <li>「NYに来た感」が強い。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">17.</span>Blue Note Jazz Club</div>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">18.</span>カーネギー・ホール</div>
+                <p>クラシック好きなら。</p>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">19.</span>リンカーン・センター</div>
+                <p>総合芸術地区。</p>
+            </div>
+        </div>
+
+        <div class="category-title">【スポーツ・歴史・定番】</div>
+        <div class="grid-cards">
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">20.</span>NYヤンキース 観戦</div>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><ruby><span class="spot-id">21.</span>US Open<rt>USオープン</rt></ruby></div>
+                <p>時期一致可能性高い。</p>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">22.</span>自由の女神</div>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">23.</span>9/11メモリアル&ミュージアム</div>
+                <div class="badges"><span class="badge match min-text">あなた向き可能性高い</span></div>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">24.</span>グランド・セントラル駅</div>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">25.</span>ニューヨーク公共図書館</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================
+         都市別：ワシントンD.C.
+         ========================================== -->
+    <div class="city-wrapper dc">
+        <h2 class="section-title" style="margin-top:0; border-color:var(--dc-color);">🏛️ ワシントンD.C.編</h2>
+
+        <div class="category-title">【最優先】</div>
+        <div class="grid-cards">
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">1.</span>ナショナル・ギャラリー</div>
+                    <div class="badges">
+                        <span class="badge super min-text">あなた向け最重要級</span>
+                        <span class="badge match min-text">相性極めて高い</span>
+                    </div>
+                    <p class="text-bold text-gold">“無料なのがおかしい”レベルの世界級美術館。</p>
+                </div>
+                <div class="detail-points">
+                    <ul>
+                        <li><strong>西洋美術が強い:</strong> フェルメール、モネ、ゴッホもある。</li>
+                        <li><strong>空気感:</strong> NYより静か、落ち着く、知的。DCらしさがある。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">2.</span>アメリカ議会図書館</div>
+                    <div class="badges">
+                        <span class="badge match min-text">知的空間好き相性◎</span>
+                        <span class="badge min-text">建築好き必須</span>
+                    </div>
+                    <p class="text-bold text-gold">「知の権威」アメリカ国家の知的象徴。</p>
+                </div>
+                <div class="detail-points">
+                    <ul>
+                        <li><strong>建築が圧巻:</strong> 天井・装飾が凄まじい。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">3.</span>ナショナル・モール</div>
+                    <div class="badges"><span class="badge min-text">夜散歩が素晴らしい</span></div>
+                    <p class="text-bold text-gold">“アメリカ国家空間” DCの本質。</p>
+                </div>
+                <div class="detail-points">
+                    <ul>
+                        <li><strong>夜散歩:</strong> 静か・ライトアップ・広い。</li>
+                        <li><strong>NYと真逆:</strong> NYの刺激の後だと、かなり心地よい。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">4.</span>リンカーン記念堂</div>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">5.</span>ワシントン記念塔</div>
+            </div>
+        </div>
+
+        <div class="category-title">【博物館】</div>
+        <div class="grid-cards">
+            <div class="spot-card"><div class="spot-name"><span class="spot-id">6.</span>国立航空宇宙博物館</div></div>
+            <div class="spot-card"><div class="spot-name"><span class="spot-id">7.</span>国立自然史博物館</div></div>
+            <div class="spot-card"><div class="spot-name"><span class="spot-id">8.</span>国立肖像画美術館</div></div>
+            <div class="spot-card"><div class="spot-name"><span class="spot-id">9.</span>アメリカ歴史博物館</div></div>
+        </div>
+
+        <div class="category-title">【街歩き・文化・歴史】</div>
+        <div class="grid-cards">
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">10.</span>ジョージタウン</div>
+                    <div class="badges"><span class="badge super min-text">超おすすめ</span><span class="badge match min-text">あなた向き</span></div>
+                    <p class="text-bold text-gold">東海岸らしい欧州感のある街並み。</p>
+                    <p>カフェ街歩き向き。</p>
+                </div>
+            </div>
+
+            <div class="spot-card">
+                <div class="spot-name"><ruby><span class="spot-id">11.</span>Dupont Circle<rt>デュポンサークル</rt></ruby></div>
+                <p>知的・落ち着いた街。</p>
+            </div>
+            <div class="spot-card">
+                <div class="spot-name"><ruby><span class="spot-id">12.</span>Capitol Hill<rt>キャピトル・ヒル</rt></ruby></div>
+            </div>
+            <div class="spot-card"><div class="spot-name"><span class="spot-id">13.</span>ケネディ・センター</div></div>
+            <div class="spot-card"><div class="spot-name"><span class="spot-id">14.</span>フォード劇場</div></div>
+            <div class="spot-card"><div class="spot-name"><span class="spot-id">15.</span>アーリントン国立墓地</div></div>
+            <div class="spot-card"><div class="spot-name"><span class="spot-id">16.</span>ホワイトハウス</div></div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================
+         都市別：ボストン
+         ========================================== -->
+    <div class="city-wrapper bos">
+        <h2 class="section-title" style="margin-top:0; border-color:var(--bos-color);">🎓 ボストン編</h2>
+
+        <div class="category-title">【最優先】美術館・トレイル</div>
+        <div class="grid-cards">
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">2.</span>イザベラ・スチュワート・ガードナー美術館</div>
+                    <div class="badges"><span class="badge match min-text">相性かなり高い(トップ級)</span></div>
+                    <p class="text-bold text-gold">“空間全体が芸術”。単なる展示ではない。</p>
+                </div>
+                <div class="detail-points">
+                    <ul>
+                        <li><strong>空間美:</strong> 美しい邸宅空間。中庭が本当に美しい。</li>
+                        <li><strong>体験:</strong> 静かな没入感があり、“余韻”が強い。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">1.</span>ボストン美術館 (MFA)</div>
+                    <div class="badges"><span class="badge match min-text">あなた向き</span></div>
+                    <p class="text-bold text-gold">印象派が非常に強い。</p>
+                </div>
+                <div class="detail-points">
+                    <ul>
+                        <li>METより混みすぎないため、疲れにくい。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="spot-card">
+                <div class="spot-name"><span class="spot-id">3.</span>フリーダム・トレイル</div>
+            </div>
+        </div>
+
+        <div class="category-title">【街歩き・大学・知性】</div>
+        <div class="grid-cards">
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">4.</span>ビーコンヒル</div>
+                    <p class="text-bold text-gold">アメリカとは思えない、かなり欧州的な街並み。</p>
+                </div>
+                <div class="detail-points">
+                    <ul>
+                        <li>石畳＋レンガ。朝散歩が良い。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">8.</span>ハーバード大学</div>
+                    <p class="text-bold text-gold">“知性の街”の空気感。</p>
+                </div>
+                <div class="detail-points">
+                    <ul>
+                        <li>観光というより空気感を味わう。</li>
+                        <li>書店・カフェが良く、知的散歩向き。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="spot-card"><div class="spot-name"><ruby><span class="spot-id">5.</span>Back Bay<rt>バック・ベイ</rt></ruby></div></div>
+            <div class="spot-card">
+                <div class="spot-name"><ruby><span class="spot-id">6.</span>North End<rt>ノースエンド</rt></ruby></div>
+                <p>イタリア街。</p>
+            </div>
+            <div class="spot-card"><div class="spot-name"><ruby><span class="spot-id">7.</span>Seaport District<rt>シーポート地区</rt></ruby></div></div>
+            <div class="spot-card"><div class="spot-name"><span class="spot-id">9.</span>マサチューセッツ工科大学 (MIT)</div></div>
+        </div>
+
+        <div class="category-title">【歴史・スポーツ・自然景観】</div>
+        <div class="grid-cards">
+            <div class="spot-card detailed">
+                <div class="spot-header">
+                    <div class="spot-name"><span class="spot-id">13.</span>フェンウェイ・パーク</div>
+                    <p class="text-bold text-gold">MLBの歴史そのもの。</p>
+                </div>
+                <div class="detail-points">
+                    <ul>
+                        <li>ヤンキースタジアムとは違う、“古き良きアメリカ”感が強い。</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="spot-card"><div class="spot-name"><span class="spot-id">10.</span>ファニエル・ホール</div></div>
+            <div class="spot-card"><div class="spot-name"><span class="spot-id">11.</span>クインシー・マーケット</div></div>
+            <div class="spot-card"><div class="spot-name"><span class="spot-id">12.</span>ボストン・レッドソックス</div></div>
+            <div class="spot-card"><div class="spot-name"><ruby><span class="spot-id">14.</span>Boston Common<rt>ボストン・コモン</rt></ruby></div></div>
+            <div class="spot-card"><div class="spot-name"><ruby><span class="spot-id">15.</span>Charles River Esplanade<rt>チャールズ川エスプラネード</rt></ruby></div></div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         総括：特に刺さる可能性が高い場所
+         ========================================== -->
+    <div class="special-picks mt-2">
+        <h2>✨ あなた向け「特に刺さる可能性が高い場所」</h2>
+        <div class="picks-grid">
+            <div class="pick-col">
+                <h3 style="color:#3498db;">New York</h3>
+                <ul>
+                    <li>Frick Collection</li>
+                    <li>West Village</li>
+                    <li>Brooklyn Heights</li>
+                    <li>Village Vanguard</li>
+                    <li>メト (MET)</li>
+                </ul>
+            </div>
+            <div class="pick-col">
+                <h3 style="color:#e74c3c;">Washington D.C.</h3>
+                <ul>
+                    <li>National Gallery</li>
+                    <li>Library of Congress</li>
+                    <li>Georgetown <span class="min-text" style="color:var(--accent-gold)">夜</span></li>
+                    <li>National Mall <span class="min-text" style="color:var(--accent-gold)">夜景</span></li>
+                </ul>
+            </div>
+            <div class="pick-col">
+                <h3 style="color:#2ecc71;">Boston</h3>
+                <ul>
+                    <li>Gardner Museum</li>
+                    <li>Beacon Hill</li>
+                    <li>Harvard周辺</li>
+                    <li>MFA Boston</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
